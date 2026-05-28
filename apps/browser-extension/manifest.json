@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "照妖鏡 AI Monitor",
+  "version": "0.1.0",
+  "description": "Detects AI commitments and missing evidence across browser chat UIs.",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": [
+    "http://127.0.0.1:47831/*",
+    "https://chatgpt.com/*",
+    "https://claude.ai/*",
+    "https://gemini.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://claude.ai/*",
+        "https://gemini.google.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "照妖鏡"
+  }
+}

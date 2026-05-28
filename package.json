@@ -1,0 +1,17 @@
+{
+  "name": "ai-lies-monitor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cross-surface AI promise and evidence monitor: browser extension, dashboard panel, and service-side watcher.",
+  "type": "module",
+  "scripts": {
+    "check": "node --check packages/core/index.js && node --check apps/service-agent/server.js && node --check apps/browser-extension/content.js && node --check apps/panel/app.js",
+    "service": "node apps/service-agent/server.js",
+    "demo": "node examples/demo-flow.js",
+    "demo:auto-mount": "NODE_OPTIONS='--import ./packages/sdk/auto-mount.js' ZJ_SESSION_ID='auto-mounted-demo' node examples/auto-mount-service.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}
