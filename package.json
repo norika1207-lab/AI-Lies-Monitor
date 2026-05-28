@@ -8,7 +8,8 @@
     "check": "node --check packages/core/index.js && node --check apps/service-agent/server.js && node --check apps/browser-extension/content.js && node --check apps/panel/app.js",
     "service": "node apps/service-agent/server.js",
     "demo": "node examples/demo-flow.js",
-    "demo:auto-mount": "NODE_OPTIONS='--import ./packages/sdk/auto-mount.js' ZJ_SESSION_ID='auto-mounted-demo' node examples/auto-mount-service.js"
+    "demo:auto-mount": "NODE_OPTIONS='--import ./packages/sdk/auto-mount.js' ZJ_SESSION_ID='auto-mounted-demo' node examples/auto-mount-service.js",
+    "tokens": "python3 tools/token-savings/mercury_cache_panel.py"
   },
   "engines": {
     "node": ">=20"

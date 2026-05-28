@@ -1,11 +1,20 @@
 # AI Lies Monitor / 照妖鏡
 
+![AI Lies Monitor hero](assets/hero-ai-lies-monitor.png)
+
 AI Lies Monitor is a local-first monitor for AI agents and chatbots.
 
 It watches the gap between what the user asked, what the AI promised, and what actually happened underneath: files, commands, processes, logs, and artifacts.
 
 中文名：照妖鏡。  
 目的：AI 一邊說「我會做」，底下卻沒有 create file、沒有 command、沒有 PID、檔案還是 0 byte 時，讓使用者立刻看到。
+
+It now bundles a token/cost monitor too:
+
+```text
+Do not get fooled by AI.
+Do not pay for wasted AI tokens.
+```
 
 ## What It Detects
 
@@ -74,6 +83,33 @@ The auto-mount layer records:
 - `fs.writeFile/writeFileSync/appendFile/appendFileSync` as file evidence
 - `child_process.exec/execFile/spawn` as command evidence
 - spawned PID as process evidence
+
+### 4. Token Savings Panel
+
+Path: `tools/token-savings/`
+
+This bundles the Mercury Cache Panel tooling. It parses local Claude Code and OpenAI Codex logs to show:
+
+- token usage
+- cache hit rate
+- wasted cache writes
+- estimated USD cost
+- projected savings from better cache behavior
+- active sessions burning money
+
+Run:
+
+```bash
+npm run tokens
+open ~/Desktop/mercury-cache-panel.html
+```
+
+The combined product promise:
+
+```text
+AI Lies Monitor checks whether the AI actually did the work.
+Token Savings Panel checks whether the AI wasted your money while talking.
+```
 
 ## Quick Start
 
@@ -156,6 +192,25 @@ evidence: file:/tmp/zj-auto-mounted.md
 ```
 
 This is the intended behavior: the monitor should not punish a real action.
+
+## Demo 3: See Token Waste and Cache Savings
+
+Run:
+
+```bash
+npm run tokens
+open ~/Desktop/mercury-cache-panel.html
+```
+
+This generates a local dashboard from:
+
+```text
+~/.claude/projects/*/*.jsonl
+~/.codex/archived_sessions/rollout-*.jsonl
+~/.codex/sessions/*/rollout-*.jsonl
+```
+
+No API call. No upload. It reads local logs and estimates where cache saved money or where cache writes expired unused.
 
 ## HTTP API
 
@@ -268,6 +323,10 @@ Browser chat UI / AI service / local agent
   -> evidence requirements
   -> file/command/process checks
   -> dashboard alerts
+
+Claude/Codex local logs
+  -> token savings parser
+  -> cache waste and cost dashboard
 ```
 
 Core package:
@@ -291,6 +350,7 @@ This is v0.1:
 - Python auto-mount is not implemented yet.
 - Shell history/process watchers are planned.
 - LLM semantic judging is not included. The first release is evidence-based, not vibe-based.
+- Token Savings Panel currently focuses on Claude Code and OpenAI Codex local logs.
 
 ## Roadmap
 
