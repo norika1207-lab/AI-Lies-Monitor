@@ -365,3 +365,7 @@ This is v0.1:
 ## License
 
 MIT. See `LICENSE`.
+
+---
+
+Author: Norika Oda (織田紀香) · https://norika.tw
